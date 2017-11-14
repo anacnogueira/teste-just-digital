@@ -57,10 +57,5 @@ class PostsTest extends TestCase
 	public function delete_a_post()
 	{
 		
-	}
-
-
-	
-}
-
- 
+	}	
+} 
