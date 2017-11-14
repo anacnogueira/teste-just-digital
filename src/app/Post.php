@@ -113,9 +113,53 @@ class Post
 
 	}
 
-	public function update()
+	public function update($id, $data)
 	{
+		//Verify first if row exists;
+		$row = $this->readById($id);
 
+		if (!$row) {
+			return false;
+		} 
+
+
+		$errors = new stdClass();
+
+		$validation = $this->validate($data);
+
+		if($validation) {
+			$errors->errors = $validation;
+
+			return $errors;
+		}
+		
+		$query = "UPDATE ".$this->table.
+		" SET 
+			title=:title,
+			body=:body,
+			path=:path
+		 WHERE id = :id";
+
+		$stmt = $this->conn->prepare($query);
+
+		//Sanitize
+		$this->title = htmlspecialchars(strip_tags($data['title']));
+		$this->body  = $data['body'];
+		$this->path  = htmlspecialchars(strip_tags($data['path']));
+
+
+		//Bind values
+		$stmt->bindParam(":title", $this->title);
+		$stmt->bindParam(":body", $this->body);
+		$stmt->bindParam(":path", $this->path);
+		$stmt->bindParam(":id", $id);
+
+		//execute query
+		if ($stmt->execute()) {
+			return true;
+		}
+
+		return false;
 	} 
 
 	public function delete()

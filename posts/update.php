@@ -12,21 +12,22 @@ $db = $database->getConnection();
 
 $post = new Post($db);
 
+$id = isset($_GET['id']) ? $_GET['id'] : null;
 $request = $_POST;
 
-$create = $post->store($request);
+$update = $post->update($id, $request);
 
-if (isset($create->errors)) {
+if (isset($update->errors)) {
  	echo json_encode([
  		'message' => 'There are errors to be corrected',
- 		'errors' => $create->errors
+ 		'errors' => $update->errors
  	]);
- } elseif($create) {
+ } elseif($update) {
  	echo json_encode([
- 		'message' => 'Post was created',
+ 		'message' => 'Post was updated',
  	]);
 } else {
 	echo json_encode([
- 		'message' => 'Unable to create post', 		
+ 		'message' => 'Unable to update post', 		
  	]);
 }
