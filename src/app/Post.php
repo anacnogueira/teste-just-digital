@@ -33,7 +33,25 @@ class Post
 
 	public function readById($id)
 	{
+		
 
+		if (empty($id) || !is_int(intval($id))) {
+			return false;
+		}
+
+		$query = "SELECT id, title, body, path from ".$this->table.
+		" WHERE id=? LIMIT 0,1";
+
+		$stmt = $this->conn->prepare($query);
+
+
+		$stmt->bindParam(1, $id);
+
+		$stmt->execute();
+
+		$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+		return $row;
 	}
 
 	public function readByPath($path)
@@ -111,11 +129,6 @@ class Post
 		}
 
 		return $errors;
-
-	}
-
-	private function errors()
-	{
 
 	}
 }

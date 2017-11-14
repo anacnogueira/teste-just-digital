@@ -18,7 +18,7 @@ $create = $post->store($request);
 
 if (isset($create->errors)) {
  	echo json_encode([
- 		'message' => 'There were errors to be corrected',
+ 		'message' => 'There are errors to be corrected',
  		'errors' => $create->errors
  	]);
  } elseif($create) {
