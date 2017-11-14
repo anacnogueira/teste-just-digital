@@ -1,3 +1,4 @@
 .phpintel/
 vendor/
 notes.txt
+.env

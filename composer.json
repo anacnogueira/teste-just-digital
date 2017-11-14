@@ -1,8 +1,9 @@
 {
-    "autoload": {
-        "psr-0": {"Application\\": "src/"}
-    },
+
     "require-dev": {
         "phpunit/phpunit": "*"
+    },
+    "require": {
+        "vlucas/phpdotenv": "^2.4"
     }
 }
