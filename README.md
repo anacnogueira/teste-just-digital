@@ -11,6 +11,7 @@
 ### Endpoints 
 
 | Method 	| Endpoints         				| Explanation  			|
+| ----------|:---------------------------------:| --------------------:	|
 | GET    	| posts/read.php 					| Lista todos os posts 	|
 | GET    	| posts/readById.php?id=id			| Mostra Post por ID 	|
 | GET 		| posts/readByPath.php?path={path}  | Mostra Post por Path	|
