@@ -56,14 +56,28 @@ class Post
 		$query = "INSERT INTO ".$this->table." SET
 			title=:title,body=:body,path=:path";
 
+
+		//Prepare
+		$stmt = $this->conn->prepare($query);
+				
 		//Sanitize
 		$this->title = htmlspecialchars(strip_tags($data['title']));
 		$this->body  = $data['body'];
 		$this->path  = htmlspecialchars(strip_tags($data['path']));
 
-		
+
 		//Bind values
+		$stmt->bindParam(":title", $this->title);
+		$stmt->bindParam(":body", $this->body);
+		$stmt->bindParam(":path", $this->path);
+
 		//execute query
+		if ($stmt->execute()) {
+			return true;
+		}
+
+		return false;
+
 	}
 
 	public function update()

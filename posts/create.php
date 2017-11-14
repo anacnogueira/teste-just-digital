@@ -18,12 +18,15 @@ $create = $post->store($request);
 
 if (isset($create->errors)) {
  	echo json_encode([
- 		'message' => 'Unable to create post',
+ 		'message' => 'There were errors to be corrected',
  		'errors' => $create->errors
  	]);
- } else {
+ } elseif($create) {
  	echo json_encode([
- 		'message' => 'Post was created',		 
-
+ 		'message' => 'Post was created',
+ 	]);
+} else {
+	echo json_encode([
+ 		'message' => 'Unable to create post', 		
  	]);
 }
