@@ -19,12 +19,10 @@ $data = $post->readByPath($path);
 
 if (!$data) {
 	echo json_encode([
-		'error' => 'No post found',
-		'return' => 404
+		'error' => 'No post found'
 	]);
 } else {
 	echo json_encode([
-		'data' => $data,
-		'return' => 200
+		'data' => $data
 	]);
 }

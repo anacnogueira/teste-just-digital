@@ -26,12 +26,10 @@ if ( $num > 0) {
 	}
 
 	echo json_encode([
-		'data' => $posts,
-		'return' => 200
+		'data' => $posts
 	]);
 } else {
 	echo json_encode([
-		'error' => 'No posts found',
-		'return' => 404
+		'error' => 'No posts found'
 	]);
 }

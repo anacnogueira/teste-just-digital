@@ -162,9 +162,26 @@ class Post
 		return false;
 	} 
 
-	public function delete()
+	public function delete($id)
 	{
+		//Verify first if row exists;
+		$row = $this->readById($id);
 
+		if (!$row) {
+			return false;
+		} 
+
+		$query = "DELETE FROM ".$this->table." WHERE id = ?";
+
+		$stmt = $this->conn->prepare($query);
+
+		$stmt->bindParam(1, $id);
+
+		if ($stmt->execute()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private function validate($request)
@@ -174,8 +191,7 @@ class Post
 		//title
 		if (!isset($request['title']) || empty($request['title'])) {
 			$errors[] = 'Title is required';
-		}
-		
+		}		
 
 		//body
 		if (!isset($request['body']) || empty($request['body'])) {
